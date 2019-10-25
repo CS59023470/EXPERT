@@ -1,0 +1,98 @@
+import 'package:firebase_database/firebase_database.dart';
+import 'package:flutter/material.dart';
+import 'package:omg/post.dart';
+
+class Assessment extends StatefulWidget {
+  @override
+  _AssessmentState createState() => _AssessmentState();
+}
+
+class _AssessmentState extends State<Assessment> {
+  List<Post> postList = [];
+
+  @override
+  void initState() {
+    super.initState();
+
+    DatabaseReference postRef = FirebaseDatabase.instance.reference().child("UserHistory");
+
+    postRef.once().then((DataSnapshot snap) {
+      var KEYS = snap.value.keys;
+      var DATA = snap.value;
+
+      postList.clear();
+
+      for(var individualKey in KEYS){
+        Post post = new Post
+          (DATA[individualKey]['Url_Picture'],
+          DATA[individualKey]['Date'],
+          DATA[individualKey]['category'],
+        );
+        
+        postList.add(post);
+      }
+
+      setState(() {
+        print('length : $postList.length');
+      });
+    });
+
+  }
+
+
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: new AppBar(
+        title: new Text("Assessment"),
+      ),
+      body: new Container(
+        child: postList.length == 0 ? new Text("No Data") : new ListView.builder(
+          itemCount: postList.length,
+          itemBuilder: (_, index){
+            return PostUI(postList[index].Url_Picture, postList[index].Date, postList[index].category);
+          },
+        ),
+      ),
+    );
+  }
+  Widget PostUI(String Url_Picture, String Date, String category){
+    return new Card(
+      elevation: 10.0,
+      margin: EdgeInsets.all(15.0),
+
+      child: new Container(
+        padding: new EdgeInsets.all(14.0),
+
+        child: new Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+
+          children: <Widget>[
+            new Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: <Widget>[
+                new Text(
+                  Date,
+                  style: Theme.of(context).textTheme.subtitle,
+                  textAlign: TextAlign.center,
+                ),
+              ],
+            ),
+            SizedBox(height: 10.0),
+
+            new Image.network(Url_Picture, fit: BoxFit.cover),
+
+            SizedBox(height: 110.0),
+
+            new Text(
+              category,
+              style: Theme.of(context).textTheme.subhead,
+              textAlign: TextAlign.center,
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
