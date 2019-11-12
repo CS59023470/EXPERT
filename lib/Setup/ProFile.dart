@@ -80,7 +80,7 @@ class _ProFileState extends State<ProFile> {
                           child: new Column(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: <Widget>[
-                              new Text("ประวัติ",style: TextStyle(fontSize: 25.0, color: Colors.black)),
+                              new Text("ประวัติการวิเคราะห์",style: TextStyle(fontSize: 25.0, color: Colors.black)),
                             ],//<Widget>[]
                           ),//Column
                         ),//GestureDetector

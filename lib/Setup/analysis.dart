@@ -2,10 +2,15 @@ import 'dart:async';
 import 'dart:io';
 import 'dart:math';
 import 'dart:typed_data';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_database/firebase_database.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:image/image.dart' as img;
 import 'package:image_picker/image_picker.dart';
+import 'package:intl/intl.dart';
+import 'package:path/path.dart';
 
 
 
@@ -36,6 +41,7 @@ class _MyAppState extends State<MyApp> {
   double _imageHeight;
   double _imageWidth;
   bool _busy = false;
+  String _userId;
 
   Future predictImagePicker() async {
     var image = await ImagePicker.pickImage(source: ImageSource.gallery);
@@ -53,6 +59,26 @@ class _MyAppState extends State<MyApp> {
     });
     predictImage(image);
   }
+
+  Future uploadPic(BuildContext context) async {
+    String fileName = basename(_image.path);
+    StorageReference firebaseStorageRef = FirebaseStorage.instance.ref().child(
+        fileName);
+    final StorageUploadTask uploadTask = firebaseStorageRef.putFile(_image);
+
+    var downUrl = await (await uploadTask.onComplete).ref.getDownloadURL();
+    var url = downUrl.toString();
+    FirebaseDatabase.instance.reference().child('ExpertHistory').child(
+        '$_userId')
+        .child(_getDateNow()).set({
+      'datetime': _getDateNow(),
+      'Url_Picture' : '$url',
+
+
+    });
+    return url;
+  }
+
   Future<void> _showChoiceDialog(BuildContext context) {
     return showDialog(context: context, builder: (BuildContext context) {
       return AlertDialog(
@@ -375,6 +401,9 @@ class _MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
+    FirebaseAuth.instance.currentUser().then((user) {
+      _userId = user.uid;
+    });
     Size size = MediaQuery.of(context).size;
     List<Widget> stackChildren = [];
 
@@ -437,6 +466,13 @@ class _MyAppState extends State<MyApp> {
       appBar: AppBar(
         title: const Text(''),
         actions: <Widget>[
+          RaisedButton(
+            color: Colors.blue,
+            onPressed: (){
+              uploadPic(context);
+            },
+            child: Text('บันทึกลงในประวัติ',style: TextStyle(color: Colors.white),),
+          ),
           PopupMenuButton<String>(
             onSelected: onSelect,
             itemBuilder: (context) {
@@ -475,6 +511,11 @@ class _MyAppState extends State<MyApp> {
         child: Icon(Icons.image),
       ),
     );
+  }
+  String _getDateNow() {
+    var now = new DateTime.now();
+    var formatter = new DateFormat('yyyy-MM-dd HH:mm:ss');
+    return formatter.format(now);
   }
 }
 
