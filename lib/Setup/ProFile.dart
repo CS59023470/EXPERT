@@ -1,7 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'History.dart';
+import 'package:omg/Setup/HistoryAnalysis.dart';
 import 'SignIn.dart';
 
 class ProFile extends StatefulWidget {
@@ -52,7 +52,7 @@ class _ProFileState extends State<ProFile> {
                       child: new Container(
                         child: new Column(
                           children: <Widget>[
-                            new Text('Email' ,style: TextStyle(fontSize: 23.0, color: Colors.black)),
+                            new Text('อีเมล' ,style: TextStyle(fontSize: 23.0, color: Colors.black)),
                           ],//<Widget>[]
                         ),//Column
                       ),//Container
@@ -80,7 +80,7 @@ class _ProFileState extends State<ProFile> {
                           child: new Column(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: <Widget>[
-                              new Text("ประวัติการวิเคราะห์",style: TextStyle(fontSize: 25.0, color: Colors.black)),
+                              new Text("ประวัติ",style: TextStyle(fontSize: 25.0, color: Colors.black)),
                             ],//<Widget>[]
                           ),//Column
                         ),//GestureDetector
@@ -102,7 +102,7 @@ class _ProFileState extends State<ProFile> {
                           child: RaisedButton(
                             onPressed: signOut,
                             color: Color(0xFFDBAC99),
-                            child: Text('Sign Out'),
+                            child: Text('ล็อคเอาท์'),
                           ),//RaiseButton
                         ),//Container
                       )//Padding

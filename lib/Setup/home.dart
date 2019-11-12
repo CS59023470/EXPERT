@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
-
-import 'Location.dart';
-import 'ProFile.dart';
-import 'assessment.dart';
-import 'camera.dart';
+import 'package:omg/Setup/Location.dart';
+import 'package:omg/Setup/ProFile.dart';
+import 'package:omg/Setup/SelectFunction.dart';
+import 'package:omg/Setup/assessment.dart';
 
 
 class Home extends StatefulWidget {
@@ -28,7 +27,7 @@ class _HomeState extends State<Home> {
                   new Row(
                     children: <Widget>[
                       Padding(
-                          padding: const EdgeInsets.only(left: 325.0, right: 20.0, top: 10.0),
+                          padding: const EdgeInsets.only(left: 300.0, right: 20.0, top: 10.0),
                           child: GestureDetector(
                             onTap: () {
                               Navigator.push(context, MaterialPageRoute(
@@ -47,7 +46,7 @@ class _HomeState extends State<Home> {
                       )//Padding
                     ],//<Widget>[]
                   ),//Row
-                  new Text("MENU",style: new TextStyle(fontSize: 65.0)),
+                  new Text("เมนู",style: new TextStyle(fontSize: 65.0)),
                   new SizedBox(
                       height: 35.0),//SizeBox
                   Row(
@@ -57,14 +56,14 @@ class _HomeState extends State<Home> {
                         child: GestureDetector(
                           onTap: () {
                             Navigator.push(context, MaterialPageRoute(
-                                builder: (context) => LandingScreen()));
+                                builder: (context) => SelectFunction()));
                           },
                           child: new Container(
                             child: Column(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: <Widget>[
                                 new Image(
-                                    image: new AssetImage("assets/camera.png"),
+                                    image: new AssetImage("assets/research.png"),
                                     height: 100, width: 100),
                               ],
                             ),
@@ -73,7 +72,7 @@ class _HomeState extends State<Home> {
                       ),
                     ],
                   ),
-                  new Text("CAMERA",style: new TextStyle(fontSize: 20)),
+                  new Text("วิเคราะห์รูปภาพ",style: new TextStyle(fontSize: 20)),
                   new SizedBox(
                       height: 35.0),//SizeBox
                   Row(
@@ -99,7 +98,7 @@ class _HomeState extends State<Home> {
                       ),//Padding
                     ],//<Widget>[]
                   ),//Row
-                  new Text("BEEF POSITION",style: new TextStyle(fontSize: 20)),
+                  new Text("แผนที่",style: new TextStyle(fontSize: 20)),
                   SizedBox(
                     height: 40,
                   ),
@@ -110,7 +109,7 @@ class _HomeState extends State<Home> {
                         child: GestureDetector(
                           onTap: () {
                             Navigator.push(context, MaterialPageRoute(
-                            builder: (context) => Assessment()));
+                               builder: (context) => Assessment()));
                           },
                           child: Container(
                             child: Column(
@@ -126,7 +125,7 @@ class _HomeState extends State<Home> {
                       ),//Padding
                     ],//<Widget>[]
                   ),//Row
-                  new Text("ASSESSMENT",style: new TextStyle(fontSize: 20)),
+                  new Text("แบบประเมินเกรดเนื้อ",style: new TextStyle(fontSize: 20)),
                 ],//<Widget>[]
               ),//Column
             ),//Container

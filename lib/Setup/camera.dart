@@ -7,6 +7,9 @@ import 'package:intl/intl.dart';
 import 'package:path/path.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 
+
+const String mobile = "MobileNet";
+
 void main() {
   runApp(new MaterialApp(
     home: LandingScreen(),
@@ -22,20 +25,17 @@ class _LandingScreenState extends State<LandingScreen> {
 
   String _value1 = null;
   List<String> _values1 = new List<String>();
-  String _value2 = null;
-  List<String> _values2 = new List<String>();
-  String _value3 = null;
-  List<String> _values3 = new List<String>();
-  String _value4 = null;
-  List<String> _values4 = new List<String>();
   File imageFile;
   String _userId;
+  String _model = mobile;
 
   _openGallary(BuildContext context) async {
     var picture = await ImagePicker.pickImage(source: ImageSource.gallery);
     this.setState(() {
       imageFile = picture;
+
     });
+
     Navigator.of(context).pop();
   }
 
@@ -43,9 +43,13 @@ class _LandingScreenState extends State<LandingScreen> {
     var picture = await ImagePicker.pickImage(source: ImageSource.camera);
     this.setState(() {
       imageFile = picture;
+
     });
+
     Navigator.of(context).pop();
   }
+
+
 
   Future<void> _showChoiceDialog(BuildContext context) {
     return showDialog(context: context, builder: (BuildContext context) {
@@ -64,6 +68,7 @@ class _LandingScreenState extends State<LandingScreen> {
                 child: Text("กล้อง"),
                 onTap: () {
                   _openCamera(context);
+
                 }, //onTap
               ) //GestureDetector
             ], //<>Widget[]
@@ -81,22 +86,26 @@ class _LandingScreenState extends State<LandingScreen> {
 
     var downUrl = await (await uploadTask.onComplete).ref.getDownloadURL();
     var url = downUrl.toString();
-    FirebaseDatabase.instance.reference().child('ส่งให้ผู้เชี่ยวชาญ').child(
-        '$_userId')
-        .child(_getDateNow()).set({
-      'datetime': _getDateNow(),
-      'Url_Picture' : '$url'
-
-    });
+    //FirebaseDatabase.instance.reference().child('UserHistory').child(
+    //'$_userId')
+    //.child(_getDateNow()).set({
+    //'datetime': _getDateNow(),
+    //'category' : '$_value1',
+    //'Url_Picture' : '$url'
+    //});
+    FirebaseDatabase.instance.reference().child('ForExpert').
+    child(_getDateNow()).set({
+      'Date': _getDateNow(),
+      'Url_Picture': '$url',
+      'category' : '$_value1',
+      'UID' : '$_userId'
+    },);
     return url;
   }
-
-  //Future uploadPic(BuildContext context) async {
-  //String fileName = basename(imageFile.path);
-  //StorageReference firebaseStorageRef = FirebaseStorage.instance.ref().child(
-  //fileName);
-  //StorageUploadTask uploadTask = firebaseStorageRef.putFile(imageFile);
-  //StorageTaskSnapshot taskSnapshot = await uploadTask.onComplete;
+  //@override
+  //void initState(){
+   // _values1.addAll(["ระบุ","ชั้นดีเลิศ","ช้นดี","ชั้นปานกลาง","ชั้นพอใช้"]);
+    //_value1 = _values1.elementAt(0);
   //}
 
   @override
@@ -104,6 +113,7 @@ class _LandingScreenState extends State<LandingScreen> {
     FirebaseAuth.instance.currentUser().then((user) {
       _userId = user.uid;
     });
+
     return Scaffold(
       body: Container(
         child: Center(
@@ -114,6 +124,26 @@ class _LandingScreenState extends State<LandingScreen> {
                   ? Image.asset(
                 "assets/picture.png", width: 400.0, height: 400.0,)
                   : Image.file(imageFile, width: 400.0, height: 400.0),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+
+                  //Text('เกรดเนื้อ  :  ',style: TextStyle(fontSize: 15.0),),
+                  ////DropdownButton<String>(
+                  //items: _values1.map<DropdownMenuItem<String>>((String value1){
+                  //return DropdownMenuItem<String>(
+                  //value: value1,
+                  //child: Text(value1,style: TextStyle(color: Colors.black87),),
+                  // );
+                  //}).toList(),
+                  //onChanged: (String newValueone){
+                  //setState(() {
+                  //this._value1 = newValueone;
+                  //});
+                  //},
+                  // ),
+                ],
+              ),
               RaisedButton(
                   onPressed: () {
                     _showChoiceDialog(context);
@@ -124,7 +154,7 @@ class _LandingScreenState extends State<LandingScreen> {
                   uploadPic(context);
                 },
                 child: Text("วิเคราะห์ภาพ"),
-              )
+              ),
             ], //<Widget>[]
           ), //Column
         ), //Center
@@ -134,7 +164,7 @@ class _LandingScreenState extends State<LandingScreen> {
 
   String _getDateNow() {
     var now = new DateTime.now();
-    var formatter = new DateFormat('yyyy-MM-dd HH:mm:ss');
+    var formatter = new DateFormat('yyyy-MM-dd HH:mm');
     return formatter.format(now);
   }
 }

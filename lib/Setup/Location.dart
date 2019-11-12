@@ -36,7 +36,7 @@ class _LocationPageState extends State<LocationPage> {
         myLocationEnabled: true,
         mapType: MapType.normal,
         initialCameraPosition: CameraPosition(
-          target: LatLng(13.7650836, 100.5379664),
+          target: LatLng(19.030821, 99.925868),
           zoom: 16,
         ),
         onMapCreated: (GoogleMapController controller) {

@@ -36,7 +36,7 @@ class _LoginPageV2State extends State<LoginPageV2> {
                       decoration: new BoxDecoration(
                           color: Color(0xFF5DB7DE),borderRadius: new BorderRadius.circular(30.0)
                       ),
-                      child: new Text("Sign In Account",style: new TextStyle(fontSize: 25.0),),
+                      child: new Text("เข้าสู่ระบบ",style: new TextStyle(fontSize: 25.0),),
                     ),//Container
                   ),//Padding
                 ),//Expanded
@@ -58,23 +58,23 @@ class _LoginPageV2State extends State<LoginPageV2> {
                       TextFormField(
                         validator: (input) {
                           if (input.isEmpty) {
-                            return 'Please type an email';
+                            return '';
                           }
                         },
                         onSaved: (input) => _email = input,
                         decoration: InputDecoration(
-                            labelText: 'Email'
+                            labelText: 'อีเมล'
                         ),
                       ),
                       TextFormField(
                         validator: (input) {
                           if (input.length > 6) {
-                            return 'Your password need to be atleast 6 characters';
+                            return 'พาสเวิร์ดของท่านต้องมีมากกว่า 6 ตัว';
                           }
                         },
                         onSaved: (input) => _password = input,
                         decoration: InputDecoration(
-                            labelText: 'Password'
+                            labelText: 'พาสเวิร์ด'
                         ),
                         obscureText: true,
                       ),
@@ -94,7 +94,7 @@ class _LoginPageV2State extends State<LoginPageV2> {
                       child: RaisedButton(
                         onPressed: signIn,
                         color: Color(0xFF5DB7DE),
-                        child: Text('Sign in'),
+                        child: Text('ล็อคอิน'),
                       ),//Container
                     ),//RaisedButton
                   ),//Padding
