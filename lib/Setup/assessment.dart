@@ -39,7 +39,7 @@ class _AssessmentState extends State<Assessment> {
     final FirebaseAuth firebaseAuth = FirebaseAuth.instance;
     currentUser = await firebaseAuth.currentUser();
     itemRef = watchRef = database.reference().
-    child('ForExpert').
+    child('ForExpert').child(currentUser.uid).
     reference();
     itemRef.onChildAdded.listen(_onEntryAdded);
   }
@@ -96,10 +96,11 @@ class _AssessmentState extends State<Assessment> {
                     ExpansionTile(
                       backgroundColor: Colors.black26,
                       trailing: Icon(Icons.search),
+                        title: Text('ให้เกรดเนื้อ',style: TextStyle(color: Colors.black),),
                       children: <Widget>[
                         new Column(
                           children: <Widget>[
-                            new Text('**ให้เกรดเนื้อ**',style: TextStyle(fontSize: 20,color: Colors.red),),
+//                            new Text('**ให้เกรดเนื้อ**',style: TextStyle(fontSize: 20,color: Colors.red),),
 //                            new Text('score 1 คือ เกรดเนื้อพอใช้',style: TextStyle(fontSize: 15),),
 //                            new Text('score 2 คือ เกรดเนื้อปานกลาง',style: TextStyle(fontSize: 15),),
 //                            new Text('score 3 คือ เกรดเนื้อดี',style: TextStyle(fontSize: 15),),
