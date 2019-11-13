@@ -24,7 +24,7 @@ class _HisAnaState extends State<HisAna> {
   @override
   void initState() {
     super.initState();
-    item = Item("", "", "", "","",);
+    item = Item("", "", "",);
     _initDB();
 
   }
@@ -34,9 +34,7 @@ class _HisAnaState extends State<HisAna> {
     final FirebaseAuth firebaseAuth = FirebaseAuth.instance;
     currentUser = await firebaseAuth.currentUser();
     itemRef = watchRef = database.reference().
-    child('ExpertHistory').
-    child(currentUser.uid).
-    reference();
+    child('ExpertHistory').child(currentUser.uid).reference();
     itemRef.onChildAdded.listen(_onEntryAdded);
   }
 
@@ -89,7 +87,6 @@ class _HisAnaState extends State<HisAna> {
                           Column(
                             children: <Widget>[
                               Text(items[index].Date),
-                              Text(items[index].Detail1),
                             ],
                           )
                         ],
@@ -109,24 +106,20 @@ class _HisAnaState extends State<HisAna> {
 class Item {
   String key;
   String Picture;
-  String Detail1;
   String Date;
   String _userId;
-  String value1;
 
-  Item(this.Picture, this.Detail1, this.Date, this._userId,this.value1);
+  Item(this.Picture, this.Date, this._userId,);
 
   Item.fromSnapshot(DataSnapshot snapshot)
       : key = snapshot.key,
         Picture = snapshot.value["Url_Picture"],
-        Detail1 = snapshot.value["category"],
         Date = snapshot.value["Date"],
         _userId = snapshot.value["UID"];
 
   toJson() {
     return {
       "Url_Picture": Picture,
-      "category": Detail1,
       "Date": Date,
       "UID": _userId,
     };

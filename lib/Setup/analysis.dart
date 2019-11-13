@@ -71,8 +71,9 @@ class _MyAppState extends State<MyApp> {
     FirebaseDatabase.instance.reference().child('ExpertHistory').child(
         '$_userId')
         .child(_getDateNow()).set({
-      'datetime': _getDateNow(),
+      'Date': _getDateNow(),
       'Url_Picture' : '$url',
+      'score' : _recognitions
 
 
     });
