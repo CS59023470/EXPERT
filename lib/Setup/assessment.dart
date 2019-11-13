@@ -96,8 +96,8 @@ class _AssessmentState extends State<Assessment> {
                     ExpansionTile(
                       backgroundColor: Colors.black26,
                       trailing: Icon(Icons.search),
-                        title: Text('ให้เกรดเนื้อ',style: TextStyle(color: Colors.black),),
-                      children: <Widget>[
+                       title: Text('ให้เกรดเนื้อ',style: TextStyle(color: Colors.black),),
+                       children: <Widget>[
                         new Column(
                           children: <Widget>[
 //                            new Text('**ให้เกรดเนื้อ**',style: TextStyle(fontSize: 20,color: Colors.red),),
@@ -134,9 +134,9 @@ class _AssessmentState extends State<Assessment> {
                                     RaisedButton(
                                       color: Colors.black87,
                                       onPressed: (){
-                                      Navigator.push(context, MaterialPageRoute(
-                                      builder: (context) => Home()
-                                      ));
+//                                      Navigator.push(context, MaterialPageRoute(
+//                                      builder: (context) => Home()
+//                                      ));
                                     FirebaseDatabase.instance.reference().child('ForExpert(Used)').child(_getDateNow()).set({
                                       'UID' : (items[index]._userId),
                                       'Url_Picture':(items[index].Picture),
@@ -144,7 +144,7 @@ class _AssessmentState extends State<Assessment> {
                                       'Detail1':(items[index].Detail1),
                                       'category': '$_value1',
                                       },);
-                                     FirebaseDatabase.instance.reference().child('ForExpert').child(currentUser.uid)
+                                    FirebaseDatabase.instance.reference().child('ForExpert').child(currentUser.uid)
                                     .child(items[index].Date).remove();
                                     //FirebaseDatabase.instance.reference().child('ExpertHistory'). //ส่งเข้า History ของตัวเอง
                                     //child('$_UserId').child(_getDateNow()).set({
