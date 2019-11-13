@@ -144,7 +144,8 @@ class _AssessmentState extends State<Assessment> {
                                       'Detail1':(items[index].Detail1),
                                       'category': '$_value1',
                                       },);
-
+                                     FirebaseDatabase.instance.reference().child('ForExpert').child(currentUser.uid)
+                                    .child(items[index].Date).remove();
                                     //FirebaseDatabase.instance.reference().child('ExpertHistory'). //ส่งเข้า History ของตัวเอง
                                     //child('$_UserId').child(_getDateNow()).set({
                                     //'Url_Picture':(items[index].Picture),
