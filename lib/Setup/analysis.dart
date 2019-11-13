@@ -74,10 +74,13 @@ class _MyAppState extends State<MyApp> {
       'Date': _getDateNow(),
       'Url_Picture' : '$url',
       'score' : _recognitions
-
-
     });
-    return url;
+    FirebaseDatabase.instance.reference().child('ExpertHistory').child(_getDateNow()).set({
+      'UID' : '$_userId',
+      'Date': _getDateNow(),
+      'Url_Picture' : '$url',
+      'score' : _recognitions
+    });
   }
 
   Future<void> _showChoiceDialog(BuildContext context) {
