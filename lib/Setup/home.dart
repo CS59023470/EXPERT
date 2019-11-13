@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:omg/Setup/Location.dart';
 import 'package:omg/Setup/ProFile.dart';
 import 'package:omg/Setup/SelectFunction.dart';
+import 'package:omg/Setup/analysis.dart';
 import 'package:omg/Setup/assessment.dart';
 
 
@@ -56,14 +57,15 @@ class _HomeState extends State<Home> {
                         child: GestureDetector(
                           onTap: () {
                             Navigator.push(context, MaterialPageRoute(
-                                builder: (context) => SelectFunction()));
+                                builder: (context) => App()));
                           },
                           child: new Container(
                             child: Column(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: <Widget>[
                                 new Image(
-                                    image: new AssetImage("assets/research.png"),
+                                    image: new AssetImage("assets/checklist.png"),
+//                                    image: new AssetImage("assets/research.png"),
                                     height: 100, width: 100),
                               ],
                             ),
@@ -72,7 +74,7 @@ class _HomeState extends State<Home> {
                       ),
                     ],
                   ),
-                  new Text("วิเคราะห์รูปภาพ",style: new TextStyle(fontSize: 20)),
+                  new Text("แบบประเมินเกรดเนื้อ",style: new TextStyle(fontSize: 20)),
                   new SizedBox(
                       height: 35.0),//SizeBox
                   Row(
@@ -89,7 +91,8 @@ class _HomeState extends State<Home> {
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: <Widget>[
                                 new Image(
-                                    image: new AssetImage("assets/position.png"),
+                                    image: new AssetImage("assets/research.png"),
+ //                                   image: new AssetImage("assets/position.png"),
                                     height: 100, width: 100),
                               ],//<Widget>[]
                             ),//Column
@@ -98,25 +101,26 @@ class _HomeState extends State<Home> {
                       ),//Padding
                     ],//<Widget>[]
                   ),//Row
-                  new Text("แผนที่",style: new TextStyle(fontSize: 20)),
+                  new Text("วิเคราะห์รูปภาพ",style: new TextStyle(fontSize: 20)),
                   SizedBox(
                     height: 40,
                   ),
                   Row(
                     children: <Widget>[
                       Padding(
-                        padding: const EdgeInsets.only(left: 155.0),
+                        padding: const EdgeInsets.only(left: 140.0),
                         child: GestureDetector(
                           onTap: () {
                             Navigator.push(context, MaterialPageRoute(
-                               builder: (context) => Assessment()));
+                               builder: (context) => LocationPage()));
                           },
                           child: Container(
                             child: Column(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: <Widget>[
                                 new Image(
-                                    image: new AssetImage("assets/checklist.png"),
+                                    image: new AssetImage("assets/position.png"),
+    //                                image: new AssetImage("assets/checklist.png"),
                                     height: 100, width: 100),
                               ],//<Widget>[]
                             ),//Column
@@ -125,7 +129,7 @@ class _HomeState extends State<Home> {
                       ),//Padding
                     ],//<Widget>[]
                   ),//Row
-                  new Text("แบบประเมินเกรดเนื้อ",style: new TextStyle(fontSize: 20)),
+                  new Text("แผนที่เนื้อที่เคยมีการวิเคราะห์",style: new TextStyle(fontSize: 20)),
                 ],//<Widget>[]
               ),//Column
             ),//Container

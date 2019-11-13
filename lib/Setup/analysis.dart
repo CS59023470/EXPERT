@@ -7,6 +7,7 @@ import 'package:firebase_database/firebase_database.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:image/image.dart' as img;
 import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
@@ -185,7 +186,9 @@ class _MyAppState extends State<MyApp> {
 //          break;
         default:
           res = await Tflite.loadModel(
-            model: "assets/mobilenet_v1_1.0_224.tflite",
+//            model: "assets/mobilenet_v1_1.0_224.tflite",
+//            labels: "assets/mobilenet_v1_1.0_224.txt",
+          model: "assets/mobilenet_v1_1.0_224.lite",
             labels: "assets/mobilenet_v1_1.0_224.txt",
           );
       }
@@ -522,6 +525,7 @@ class _MyAppState extends State<MyApp> {
     return formatter.format(now);
   }
 }
+
 
 class Tflite {
   static const MethodChannel _channel = const MethodChannel('tflite');

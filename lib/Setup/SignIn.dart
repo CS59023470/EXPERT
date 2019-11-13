@@ -127,10 +127,12 @@ class _LoginPageV2State extends State<LoginPageV2> {
   }
 
   void signIn() async {
+//    final formState = _formKey.currentState;
     if(_formKey.currentState.validate()){
       _formKey.currentState.save();
       try{
         await FirebaseAuth.instance.signInWithEmailAndPassword(email: _email, password: _password);
+//        FirebaseUser user = (await FirebaseAuth.instance.signInWithEmailAndPassword(email: _email, password: _password)) as FirebaseUser;
         Navigator.push(context, MaterialPageRoute(builder: (context) => Home()));
 
       }catch(e){
