@@ -91,6 +91,40 @@ class _HisAnaState extends State<HisAna> {
                           )
                         ],
                       ),
+                      ExpansionTile(
+                        backgroundColor: Colors.black54,
+                        trailing: Icon(Icons.search),
+                        title: Text('กดเพื่อดูรายละเอียดการาวิเคราะห์',style: TextStyle(color: Colors.black),),
+                        children: <Widget>[
+                          Row(
+                            children: <Widget>[
+                              Column(
+                                children: <Widget>[
+                                  new Text('    รายละเอียด    ',style: TextStyle(fontSize: 16.0),),
+                                  new SizedBox(height: 15.0,),
+                                  new Text('คะแนน'),
+                                  new SizedBox(height: 15.0,),
+                                  new Text('ความแม่นยำ'),
+                                  new SizedBox(height: 15.0,),
+                                ],
+                              ),
+                              Column(
+                                mainAxisAlignment: MainAxisAlignment.end,
+                                children: <Widget>[
+//                                  new Text(items[index].value1),
+//                                  new SizedBox(height: 15.0,),
+//                                  Text(items[index].value1,
+//                                    style: TextStyle(fontSize: 16.0),),
+//                                  new SizedBox(height: 15.0,),
+//                                  Text(items[index].value2,
+//                                   style: TextStyle(fontSize: 16.0),),
+//                                  new SizedBox(height: 15.0,),
+                                ],
+                              )
+                            ],
+                          ),
+                        ],
+                      )
                     ],
                   );
                 },

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:omg/Setup/SignUp.dart';
 
 import 'home.dart';
 
@@ -101,6 +102,24 @@ class _LoginPageV2State extends State<LoginPageV2> {
                 ),//Expanded
               ],//<Widget>[]
             ),//Row
+            Expanded(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: <Widget>[
+                  Padding(
+                    padding: const EdgeInsets.only(bottom: 18.0),
+                    child: GestureDetector(
+                      onTap: () {
+                        Navigator.push(context, MaterialPageRoute(
+                            builder: (context) => SignUp()));
+                      },//onTap
+                      child: new Text("สมัครบัญชีผู้ใช้",style: new TextStyle(
+                          fontSize: 17.0, color: Colors.lightBlue)),
+                    ),//GestureDetector
+                  ),//Padding
+                ],//<Widget>[]
+              ),//Column
+            ),
           ],//<Widget>[]
         ),//Column
       ),//Container

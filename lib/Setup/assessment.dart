@@ -136,13 +136,12 @@ class _AssessmentState extends State<Assessment> {
                                       Navigator.push(context, MaterialPageRoute(
                                       builder: (context) => Home()
                                       ));
-                                    FirebaseDatabase.instance.reference().child('ForExpert(Used)').  //ส่งคืนไปยัง User ที่ส่งมาให้วิเคราะห์
-                                    child(items[index]._userId).child(_getDateNow()).set({
-                                    'Url_Picture':(items[index].Picture),
-                                    'Date':(items[index].Date),
-                                    'Detail1':(items[index].Detail1),
-                                    'category': '$_value1',
-
+                                    FirebaseDatabase.instance.reference().child('ForExpert(Used)').child(_getDateNow()).set({
+                                      'UID' : (items[index]._userId),
+                                      'Url_Picture':(items[index].Picture),
+                                      'Date':(items[index].Date),
+                                      'Detail1':(items[index].Detail1),
+                                      'category': '$_value1',
                                       },);
 
                                     //FirebaseDatabase.instance.reference().child('ExpertHistory'). //ส่งเข้า History ของตัวเอง
